@@ -1,0 +1,3 @@
+/mnt/c/אור/My-Calculator-Scanner-and-Parser- 90 main/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/mnt/c/אור/My-Calculator-Scanner-and-Parser- 90 main/cmake-build-debug/CMakeFiles/edit_cache.dir
+/mnt/c/אור/My-Calculator-Scanner-and-Parser- 90 main/cmake-build-debug/CMakeFiles/My_Calculator_Scanner_and_Parser__90_main.dir

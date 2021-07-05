@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="My_Calculator_Scanner_and_Parser__90_main"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/mnt/c/אור/My-Calculator-Scanner-and-Parser- 90 main/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/mnt/c/אור/My-Calculator-Scanner-and-Parser-\ 90\ main/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/mnt/c/אור/My-Calculator-Scanner-and-Parser-\ 90\ main/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/mnt/c/אור/My-Calculator-Scanner-and-Parser-\ 90\ main/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/mnt/c/אור/My-Calculator-Scanner-and-Parser-\ 90\ main/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/mnt/c/אור/My-Calculator-Scanner-and-Parser- 90 main/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/mnt/c/אור/My-Calculator-Scanner-and-Parser-\ 90\ main/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/mnt/c/אור/My-Calculator-Scanner-and-Parser-\ 90\ main/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/mnt/c/אור/My-Calculator-Scanner-and-Parser-\ 90\ main/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/mnt/c/אור/My-Calculator-Scanner-and-Parser-\ 90\ main/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/mnt/c/אור/My-Calculator-Scanner-and-Parser- 90 main/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/mnt/c/אור/My-Calculator-Scanner-and-Parser-\ 90\ main/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/mnt/c/אור/My-Calculator-Scanner-and-Parser-\ 90\ main/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/mnt/c/אור/My-Calculator-Scanner-and-Parser-\ 90\ main/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/mnt/c/אור/My-Calculator-Scanner-and-Parser-\ 90\ main/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="My_Calculator_Scanner_and_Parser__90_main">
+				<Option output="/mnt/c/אור/My-Calculator-Scanner-and-Parser- 90 main/cmake-build-debug/My_Calculator_Scanner_and_Parser__90_main" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/mnt/c/אור/My-Calculator-Scanner-and-Parser- 90 main/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/mnt/c/אור/My-Calculator-Scanner-and-Parser- 90 main/Calculator with scanner and parser"/>
+					<Add directory="/usr/include/c++/9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
+					<Add directory="/usr/include/c++/9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/mnt/c/אור/My-Calculator-Scanner-and-Parser-\ 90\ main/cmake-build-debug/Makefile&quot;  VERBOSE=1 My_Calculator_Scanner_and_Parser__90_main"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/mnt/c/אור/My-Calculator-Scanner-and-Parser-\ 90\ main/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/mnt/c/אור/My-Calculator-Scanner-and-Parser-\ 90\ main/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/mnt/c/אור/My-Calculator-Scanner-and-Parser-\ 90\ main/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="My_Calculator_Scanner_and_Parser__90_main/fast">
+				<Option output="/mnt/c/אור/My-Calculator-Scanner-and-Parser- 90 main/cmake-build-debug/My_Calculator_Scanner_and_Parser__90_main" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/mnt/c/אור/My-Calculator-Scanner-and-Parser- 90 main/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/mnt/c/אור/My-Calculator-Scanner-and-Parser- 90 main/Calculator with scanner and parser"/>
+					<Add directory="/usr/include/c++/9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
+					<Add directory="/usr/include/c++/9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/mnt/c/אור/My-Calculator-Scanner-and-Parser-\ 90\ main/cmake-build-debug/Makefile&quot;  VERBOSE=1 My_Calculator_Scanner_and_Parser__90_main/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/mnt/c/אור/My-Calculator-Scanner-and-Parser-\ 90\ main/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/mnt/c/אור/My-Calculator-Scanner-and-Parser-\ 90\ main/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/mnt/c/אור/My-Calculator-Scanner-and-Parser-\ 90\ main/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/mnt/c/אור/My-Calculator-Scanner-and-Parser- 90 main/Calculator with scanner and parser/calc.cpp">
+			<Option target="My_Calculator_Scanner_and_Parser__90_main"/>
+		</Unit>
+		<Unit filename="/mnt/c/אור/My-Calculator-Scanner-and-Parser- 90 main/Calculator with scanner and parser/parser.cpp">
+			<Option target="My_Calculator_Scanner_and_Parser__90_main"/>
+		</Unit>
+		<Unit filename="/mnt/c/אור/My-Calculator-Scanner-and-Parser- 90 main/Calculator with scanner and parser/scanner.cpp">
+			<Option target="My_Calculator_Scanner_and_Parser__90_main"/>
+		</Unit>
+		<Unit filename="/mnt/c/אור/My-Calculator-Scanner-and-Parser- 90 main/Calculator with scanner and parser/scanner.h">
+			<Option target="My_Calculator_Scanner_and_Parser__90_main"/>
+		</Unit>
+		<Unit filename="/mnt/c/אור/My-Calculator-Scanner-and-Parser- 90 main/Calculator with scanner and parser/symtab.cpp">
+			<Option target="My_Calculator_Scanner_and_Parser__90_main"/>
+		</Unit>
+		<Unit filename="/mnt/c/אור/My-Calculator-Scanner-and-Parser- 90 main/Calculator with scanner and parser/symtab.h">
+			<Option target="My_Calculator_Scanner_and_Parser__90_main"/>
+		</Unit>
+		<Unit filename="/mnt/c/אור/My-Calculator-Scanner-and-Parser- 90 main/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
