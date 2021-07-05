@@ -1,151 +1,70 @@
 #include "scanner.h"
 #include "symtab.h"
-// globals
+
+// גלובלים
 Token_stream ts;
-Symbol_table st; 
-bool bif=false;
-bool belse=false;
-int valif=-10000;
-int valelse=-10000;
+Symbol_table st;
 
 int statement()
 {
-    
-	Token t = ts.get();  // get the next token from token stream
-
-	switch (t.kind) {
-	case INT:
-		return declaration();
-    case IF :
-    {
-        if(st.sym_tab.find("if")==st.sym_tab.end())
-            st.declare("if", -1);
-
-        else
-        {
-            st.set("if",-1);
-             bif=false;
-             belse=false;
-             valif=-10000;
-             valelse=-10000;
-        }
-    
-        ts.putback(t);
-        return expression();
+    Token t = ts.get();
+    switch (t.kind) {
+        case INT:
+            return declaration();
+        case IF:
+            return condition();
+        default:
+            ts.putback(t);
+            return logicialOr();
     }
-    case NOLINE:
-         ts.putback(t);
-         return expression();
-    
-    case EXIT :
-        exit(0);
-                 
-	default:
-		ts.putback(t);     // put t back into the token stream
-		return expression();
-	}
 }
 
 int declaration()
 {
-	Token t = ts.get();
-	if (t.kind != ID) throw runtime_error("name expected in declaration");
-	string name = t.name;
-        st.declare(name, 0);
-	return 0;
+    Token t = ts.get();
+    if (t.kind != ID) throw runtime_error("name expected in declaration");
+    string name = t.name;
+    st.declare(name, 0);
+    return 0;
+}
+
+int condition()
+{
+    int stipulation = logicialOr(); //Read condition value
+    int do_statement = logicialOr();
+    Token t = ts.get();
+    int do_not_statement = logicialOr();
+
+    if(t.kind != ELSE){
+        throw runtime_error("if without else");
+    }
+    else if(stipulation != 0){ //i.e. condition is true
+        return do_statement;
+    }
+    else{
+        return do_not_statement;
+    }
 }
 
 // + and -
 int expression()
 {
-
-    int left = term();      // read and evaluate a Term
-    int right;
-   
+    int left = term();
     Token t = ts.get();
-       // get the next token from token stream
-    
+
     while (true) {
         switch (t.kind) {
-        case '+':
-            
-            left += term();    // evaluate Term and add
-
-            t = ts.get();
-            break;
-        case '-':
-
-            left -= term();  // evaluate Term and subtract                     
-            t = ts.get();
-            break;
-        case '>':
-        {
-            right = term();
-            t = ts.get();
-
-            if(left>right)
-            left=1;
-            else
-            left=0;
-            break;
-        }
-        case '<':
-        {
-            right = term();
-
-            if(left<right)
-            left=1;
-            else
-            left=0;
-            
-            t = ts.get();
-            break;
-
-        }
-        case '&':
-        {
-            right = term();
-            if(((left==0 && right==1) || (left==1 && right==0) || (left==0 && right==0)))
-            left=0;
-            else
-            left=1;
-
-            t = ts.get();
-            break;
- 
-        }
-
-        case '|':
-        {
-           
-            right = term();
-            if((left==0 && right==1) || (left==1 && right==0) || (left==1 && right==1))
-            left=1;
-            else
-            left=0;
-
-            t = ts.get();
-            break;
-
-        }    
-
-        default:
-        
-        if(bif==true && belse==true && st.get("if").value==1 && valif!=-10000)
-         left = valif;
-
-        if(belse==true && bif==true && st.get("if").value==0 && valelse!=-10000)
-        {
-            left = valelse;
-            belse=false;
-            bif=false; 
-        }
-         
-        ts.putback(t); // put t back into the token stream
-        
-        
-        return left;   // finally: no more + or -: return the answer
-        
+            case '+':
+                left += term();
+                t = ts.get();
+                break;
+            case '-':
+                left -= term();
+                t = ts.get();
+                break;
+            default:
+                ts.putback(t);
+                return left;
         }
     }
 }
@@ -153,85 +72,28 @@ int expression()
 // * and /
 int term()
 {
-    
     int left = primary();
     Token t = ts.get();
 
-    while (true) {
-        switch (t.kind) {
-        case '*':
-            left *= primary();
-            t = ts.get();
-            break;
-        case '/':
+    while (true)
+    {
+        switch (t.kind)
         {
-            int d = primary();
-            if (d == 0) throw runtime_error("divide by zero");
-            left /= d;
-            t = ts.get();
-            break;
-        }
-        case '>':
-        {
-            
-            int d = primary();
-
-            if(left>d)
-            left=1;
-            else 
-            left=0;
-
-            t = ts.get();
-            break;
-        }
-        case '<':
-        {
-
-            int d = primary();
-
-            if(left<d)
-            left=1;
-            else 
-            left=0;
-
-            t = ts.get();
-            break;
-            
-        }   
-        case '&':
-        {
-            
-            int d = term();
-   
-            if(((left==0 && d==1) || (left==1 && d==0) || (left==0 && d==0)))
-            left=0;
-            else
-            left=1;
-            
-            t = ts.get();
-            break;
-
-        }
-
-        case '|':
-        {
-            
-            int d = term();
-      
-            if((left==0 && d==1) || (left==1 && d==0) || (left==1 && d==1))
-            left=1;
-            else
-            left=0;
-
-            t = ts.get();
-            break;
-
-        }
-
-        default:
-            
-            ts.putback(t);
-            return left;
+            case '*':
+                left *= primary();
+                t = ts.get();
+                break;
+            case '/':
+            {
+                int d = primary();
+                if (d == 0) throw runtime_error("divide by zero");
+                left /= d;
+                t = ts.get();
+                break;
+            }
+            default:
+                ts.putback(t);
+                return left;
         }
     }
 }
@@ -240,96 +102,96 @@ int primary()
 {
     Token t = ts.get();
 
-    int result;
     switch (t.kind) {
-    case '(':    // handle '(' expression ')'
-    {
-        int d = expression();
-      
-        t = ts.get();
-        if (t.kind != ')') throw runtime_error("')' expected");
-            return d;
-    }
-    
-    case '!':
-    {
-        int d=expression();
-        if(d==0)
-        return 1;
-        else 
-        return 0;
-
-    }
-    
-    case IF:
-    {
-       
-        int d=expression();
-        bif=true;
-        if(d==1)
+        case '(':    // handle '(' expression ')'
         {
-            int ans=expression();
-            valif=ans;
-           
-            st.set("if",1);
-            return ans;
-        }
-        else 
-        {
-            int ans=expression();
-          
+            int d = logicialOr();
             t = ts.get();
-            if(t.kind!=ELSE) throw runtime_error("need else after if");
-            
-            ts.putback(t);
-            st.set("if",0);
-            return ans;
+            if (t.kind != ')'){
+                throw runtime_error("')' expected");
+            }else{
+                return d;
+            }
         }
-        
+        case '-':
+            return - primary();
+        case '+':
+            return primary();
+        case '!':
+            return !primary();  //! has higher precedence then * and /
+        case NUM:
+            return t.value;  // return the number value
+        case ID:
+        {
+            string n = t.name;
+            Token next = ts.get();
+            if (next.kind == '=') {	// name = expression
+                int d = logicialOr();
+                st.set(n, d);
+                return d; // return the assignment value
+            }
+            else {
+                ts.putback(next);		// not an assignment
+                return st.get(t.name).value;  // return the id value
+            }
+        }
+        default:
+            throw runtime_error("primary expected");
+    }
+}
+
+int logicialOr()
+{
+    //לוגם עדיפות גבוהה מאו
+    int left = logicialAnd();
+    Token t = ts.get();
+
+    while(true) {
+        if (t.kind == '|') {
+            int right = logicialAnd();
+            left = (left || right);
+            t = ts.get();
+        } else {
+            ts.putback(t);
+            return left;
+        }
     }
 
-    case ELSE:
-    {
-       
-        int d=expression();
-        belse=true;
-        valelse=d;
-        return d;
+}
+int logicialAnd()
+{
+    int left = logiciakBiggerOrSmaller();
+    Token t = ts.get();
+
+    while(true) {
+        if (t.kind == '&') {
+            int right = logiciakBiggerOrSmaller();
+            left = (left && right);
+            t = ts.get();
+        } else {
+            ts.putback(t);
+            return left;
+        }
     }
+}
+int logiciakBiggerOrSmaller()
+{
+    int left = expression();
+    Token t = ts.get();
 
-    case NOLINE:
-    {
-        int p=expression();
-        return p;
-    }
-
-
-    case '-':
-    return - primary();
-    case '+':
-	return primary();
-    case NUM:
-    return t.value; // return the number value
-    
-    case ID:
-    {
-	string n = t.name;
-  
-	Token next = ts.get();
-    if (next.kind == '=') {	// name = expression
-
-            int d = expression();
-        st.set(n, d);
-            return d; // return the assignment value
-	}
-	else
-    {
-        ts.putback(next);		// not an assignment
-        return st.get(t.name).value;  // return the id value
-	}
-
-    }
-    default:
-        throw runtime_error("primary expected");
+    while (true) {
+        switch(t.kind){
+            case '<':
+                left = (left < expression());
+                t = ts.get();
+                break;
+            case '>':
+                left = (left > expression());
+                t = ts.get();
+                break;
+            default:
+                ts.putback(t);
+                return left;
+        }
     }
 }

@@ -1,71 +1,89 @@
+
 #include "scanner.h"
 
-// putback() puts its argument back into the Token_stream's buffer
-void Token_stream::putback(Token t)
+
+void Token_stream::putback(Token tokenizer)
 {
     if (full) throw runtime_error("putback into a full buffer");
-    buffer = t;             // copy t to buffer
-    full = true;            // buffer is now full
+    buffer = move(tokenizer);
+    full = true;
 }
 
 Token Token_stream::get()
 {
-    if (full) {             // do we already have a Token ready?
-        full = false;       // remove token from buffer
+    if (full)
+    {
+        full = false;
         return buffer;
     }
-    string noline;
+
     char ch;
-    cin.get(ch); // cin.get() does NOT skip whitespace
-
-                
-    while (isspace(ch)) {
-          
-        if (ch == '\n')
-        return Token(EOL);
-       
+    cin.get(ch);
+    while (isspace(ch) || ch == '\\') {
+        if(ch == '\\')
+        {
+            cin.get(ch);
+            if(!isspace(ch)){
+                throw runtime_error("illegal char after \\");
+            }
+        }
+        else if (ch == '\n')
+        {
+            return Token(EOL);
+        }
         cin.get(ch);
-
     }
 
-    if(ch=='\\')
+    switch (ch)
     {
-        noline+=ch;
-        cin.get(ch);
-        noline+=ch;
-       
-    }
-    if(noline[0]=='\\' && noline[1]=='\n')
-        return Token(NOLINE);
-    
-    
-    switch (ch) {
-    case '(': case ')': case '+': case '-': case '*': case '/': case '=': case 'q': case '|': case '&': case '!': case '<': case '>':
-        return Token(ch);   // let each character represent itself
-    default:
-    if (isdigit(ch)) {
-	string s;
-	s += ch;
-	while (cin.get(ch) && isdigit(ch)) s += ch;
-	cin.unget();
-//	return Token(number, stoi(s));
-	return Token(NUM, stoi(s));
-    }
-    if (isalpha(ch) || ch=='_') {
-	string s;
-	s += ch;
-	while (cin.get(ch) && (isalpha(ch) || isdigit(ch) || ch=='_')) s += ch;
-	cin.unget();
-        if (s == "int") return Token(INT);
-        if (s == "if")	return Token(IF);  
-        if (s == "else")	return Token(ELSE);
-        if (s=="q") return Token(EXIT);
-        if (regex_match(s, regex("[A-Za-z][A-Za-z0-9]*")))
-            return Token(ID, s);
-        else
-            throw runtime_error("Illegal name");
-    }
-    throw runtime_error("Bad token");
+        case '(': case ')': case '+': case '-': case '*': case '/': case '=': case 'q':
+        case '<': case '>': case '&': case '|': case '!':
+            return Token(ch);
+        default:
+            if (isdigit(ch))
+            {
+                string sTrInG;
+                sTrInG += ch;
+                while (cin.get(ch) && isdigit(ch)){
+                    sTrInG += ch;
+                }
+                cin.unget();
+
+                return Token(NUM, stoi(sTrInG));
+            }
+
+            if (isalpha(ch) || ch=='_')
+            {
+                string strings;
+                strings += ch;
+                while (cin.get(ch) && (isalpha(ch) || isdigit(ch) || ch=='_'))
+                {
+                    strings += ch;
+                }
+
+                cin.unget();
+                if (strings == "int")
+                {
+                    return Token(INT);
+                }
+                if(strings == "if")
+                {
+                    return Token(IF);
+                }
+                if(strings == "else")
+                {
+                    return Token(ELSE);
+                }
+                if (regex_match(strings, regex("[A-Za-z][A-Za-z0-9]*")))
+                {
+                    return Token(ID, strings);
+                }
+                else
+                    {
+                    throw runtime_error("not a good name");
+                }
+            }
+
+            throw runtime_error("wrong token");
     }
 }
-
