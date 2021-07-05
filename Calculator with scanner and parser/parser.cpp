@@ -1,5 +1,87 @@
 #include "scanner.h"
 #include "symtab.h"
+#include<iostream>
+#include<string>
+#include<map>
+#include<algorithm>
+
+// returns a number from 0 up to, but excluding x
+const int getrandom0 (const int x)
+{
+    if (x <= 0)
+        return 0;
+
+    // r will be between 0 and 1 (but below 1 as we are dividing by RAND_MAX+1)
+    double r = static_cast<double> (std::rand () % RAND_MAX) / (static_cast<double> (RAND_MAX) + 1.0);
+    return (r * x);
+
+}   // end of getrandom
+
+const int roll (const int howmany, const int die)
+{
+    int count;
+    int total = 0;
+
+    for (count = 0; count < howmany; ++count)
+        total += getrandom0 (count) + 1;
+
+    return total;
+
+} // end of roll
+
+
+// returns true if a x% probability exists
+// eg. percent (80) will be true 80% of the time
+const bool percent0 (const int prob)
+{
+    if (prob <= 0)
+        return false;
+    if (prob >= 100)
+        return true;
+
+    return getrandom0 (100) > (100 - prob);
+
+}
+
+static int initRandom0 ()
+{
+    srand   (time (NULL));
+#ifndef WIN32
+    srand48 (time (NULL));
+#endif
+    return 0;
+}
+
+
+
+//////////////  empleado
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // גלובלים
 Token_stream ts;
